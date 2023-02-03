@@ -58,7 +58,7 @@
 						</li>
 
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="assessment.php">
+						  <a class="nav-link text-white " href="https://skrfffe1-vetcare-main-h328ip.streamlit.app">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i class="fas fa-dna"></i>
@@ -163,13 +163,13 @@
 								  <div class="row mb-4">
 								    <div class="col">
 								      <div class="form-outline">
-								        <input type="text" id="ownername" name="owner_name" class="form-control" value="" />
+								        <input type="text" id="ownername" name="owner_name" class="form-control" value="" required />
 								        <label class="form-label" for="form6Example1">Owner Name</label>
 								      </div>
 								    </div>
 								    <div class="col">
 								      <div class="form-outline">
-								        <input onkeyup="GetDetail(this.value)" type="text" id="user_id" name="unique_id" class="form-control" value="" />
+								        <input onkeyup="GetDetail(this.value)" type="text" id="user_id" name="unique_id" class="form-control" value="" required />
 								        <label class="form-label" for="form6Example2">ID Code</label>
 								      </div>
 								    </div>
@@ -177,31 +177,31 @@
 
 								  <!-- Text input -->
 								  <div class="form-outline mb-4">
-								    <textarea class="form-control" name="examination" id="examination" rows="3" value=""></textarea>
+								    <textarea class="form-control" name="examination" id="examination" rows="3" value="" required></textarea>
 								    <label class="form-label" for="form6Example3">Examination</label>
 								  </div>
 
 								  <!-- Text input -->
 								  <div class="form-outline mb-4">
-								    <textarea class="form-control"  name="test" id="test" rows="3" value=""></textarea>
+								    <textarea class="form-control"  name="test" id="test" rows="3" value="" required></textarea>
 								    <label class="form-label" for="form6Example4">Test</label>
 								  </div>
 
 								  <!-- Email input -->
 								  <div class="form-outline mb-4">
-								    <textarea class="form-control" name="d_diagnosis" id="dd" rows="3" value=""></textarea>
+								    <textarea class="form-control" name="d_diagnosis" id="dd" rows="3" value="" required></textarea>
 								    <label class="form-label" for="form6Example5">Differential Diagnosis</label>
 								  </div>
 
 								  <!-- Number input -->
 								  <div class="form-outline mb-4">
-								    <textarea class="form-control" name="c_diagnosis" id="cd" rows="3" value=""></textarea>
+								    <textarea class="form-control" name="c_diagnosis" id="cd" rows="3" value="" required></textarea>
 								    <label class="form-label" for="form6Example6">Consult Diagnosis</label>
 								  </div>
 
 								  <!-- Message input -->
 								  <div class="form-outline mb-4">
-								    <textarea class="form-control"  name="treatment" id="treatment" rows="4" value=""></textarea>
+								    <textarea class="form-control"  name="treatment" id="treatment" rows="4" value="" required></textarea>
 								    <label class="form-label" for="form6Example7">Treatment</label>
 								  </div>
 

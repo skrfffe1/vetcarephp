@@ -3,17 +3,17 @@
 	require_once("connection.php");
 
 	$query = "SELECT * FROM consultation";
-    $result = mysqli_query($con,$query);
+	$result = mysqli_query($con,$query);
 
-  $user = $_SESSION['type_of_user'];
-  $query2 = " select * from users where password = '$user'";
+	$user = $_SESSION['type_of_user'];
+	$query2 = " select * from users where password = '$user'";
 
 
-  $result2 = mysqli_query($con,$query2);
+	$result2 = mysqli_query($con,$query2);
 
-  $consult_id = $_GET['GetID'];
-  $query = "SELECT * FROM consultation WHERE consult_id='".$consult_id."'";
-  $result = mysqli_query($con,$query);
+	$consult_id = $_GET['GetID'];
+	$query = "SELECT * FROM consultation WHERE unique_id ='".$consult_id."'";
+	$result = mysqli_query($con,$query);
 
     while($row=mysqli_fetch_assoc($result))
         {

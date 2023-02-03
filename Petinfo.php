@@ -2,7 +2,7 @@
   include('security.php');
     require_once("connection.php");
 
-		$query = " select consult_id, p_name, l_name, examination, test, d_diagnosis, c_diagnosis, treatment from consultation";
+		$query = "SELECT * FROM users";
     $result = mysqli_query($con,$query);
 
   $user = $_SESSION['type_of_user'];
@@ -129,7 +129,7 @@
 				              <?php                       
 				                         while($row=mysqli_fetch_assoc($result2))
 				                            {
-				                                $user_id= $row['user_id'];
+				                                $user_id= $row['unique_id'];
 				                                $name = $row['name'];
 				                                $username = $row['username'];
 				                                $password = $row['password'];
@@ -214,28 +214,27 @@
                                     <table id="table1" class="table-dark table-sm table-bordered " style="text-align: center;">
                                             <thead>
                                               <tr>
-                                                <th scope="col" class="A-own">Pet Name</th>
-                                                <th scope="col" class="A-cont">Last Name</th>
-                                                <th scope="col" class="A-act">Examination</th>
+                                                <th scope="col" class="A-own">ID Code</th>
+                                                <th scope="col" class="A-cont">Name</th>
+                                                <th scope="col" class="A-act">Role</th>
                                                 <th scope="col" class="A-act" id="A-act1">Action</th>
                                               </tr>
                                             </thead>
                                        <?php                       
                                            while($row=mysqli_fetch_assoc($result))
                                               {
-                                                  $consult_id= $row['consult_id'];
-										                              $p_name = $row['p_name'];
-                    										          $l_name = $row['l_name'];
-                    										          $examination = $row['examination'];
+                                                  $unique_id= $row['unique_id'];
+										                              $name = $row['name'];
+                    										          $role = $row['type_of_user'];
                                       ?>
 
                                   <tr class="table table-dark table-striped table-sm table-bordered" style="color: black;">
-                                    	<td><?php echo $p_name ?></td>
-										<td><?php echo $l_name ?></td>
-										<td><?php echo $examination ?></td>
-										<td><a class="btn btn-xs btn-info" href="adminviewconsult.php?GetID=<?php echo $consult_id ?>">View Data</a>
-										<a class="btn btn-xs btn-warning" href="adminconsultupdate.php?GetID=<?php echo $consult_id ?>">Update</a>
-										<a class="btn btn-xs btn-danger" href="consuldelete.php?Del=<?php echo $consult_id ?>" onclick="return confirm('Do you want to delete data?')">Delete</a>
+                                    	<td><?php echo $unique_id ?></td>
+										<td><?php echo $name ?></td>
+										<td><?php echo $role ?></td>
+										<td><a class="btn btn-xs btn-info" href="accusers.php?GetID=<?php echo $unique_id ?>">View Data</a>
+                      <!-- <a class="btn btn-xs btn-warning" href="adminconsultupdate.php?GetID=<?php echo $unique_id ?>">Update</a> -->
+                      <a class="btn btn-xs btn-danger" href="consuldelete.php?Del=<?php echo $unique_id ?>" onclick="return confirm('Do you want to delete data?')">Delete</a>
 										</td>
                                   </tr> 
                                       <?php 

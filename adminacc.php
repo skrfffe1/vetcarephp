@@ -12,7 +12,7 @@
         $email = $_POST['email'];
         $num = $_POST['num'];
 
-        $query = " UPDATE users SET name = '".$name."', username = '".$username."', password= '".$password."', type_of_user = '".$type_of_user."', email = '".$email."', num = '".$num."' where user_id= '".$user_id."'";
+        $query = "UPDATE users SET name = '".$name."', username = '".$username."', password= '".$password."', type_of_user = '".$type_of_user."', email = '".$email."', num = '".$num."' where user_id= '".$user_id."'";
         $result = mysqli_query($con,$query);
 
         if($result)

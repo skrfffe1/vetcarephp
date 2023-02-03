@@ -2,26 +2,16 @@
 	include('security.php');
 	require_once("connection.php");
 
-  $user = $_SESSION['type_of_user'];
-  $query2 = "select * from users where password = '$user'";
+	$username = $_SESSION['username'];
+
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $adminquery = mysqli_query($con, $query);
+
+    // while ($row = mysqli_fetch_assoc($adminquery)) {
+    //     $uuid = $row['unique_id'];
+    // }
 
 
-  $result2 = mysqli_query($con,$query2);
-
-  $user_id = $_GET['GetID'];
-  $query = "select * from users where user_id='".$user_id."'";
-  $result = mysqli_query($con,$query);
-
-    while($row=mysqli_fetch_assoc($result))
-        {
-            $user_id= $row['user_id'];
-            $name = $row['name'];
-            $username = $row['username'];
-            $password = $row['password'];
-            $type_of_user = $row['type_of_user'];
-            $email = $row['email'];
-            $num = $row['num'];
-        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +34,9 @@
 		</head>
 		  <body class="g-sidenav-show  bg-gray-100">
 		     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+
+
+
 		  <div class="sidenav-header">
 		    <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 		    <a class="navbar-brand m-0">
@@ -62,7 +55,7 @@
 		             
 						  
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="DoctorDashboard.php">
+						  <a class="nav-link text-white " href="dashboard.php">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i class="fa fa-cubes"></i>
@@ -73,18 +66,33 @@
 						</li>
 
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="https://skrfffe1-vetcare-main-h328ip.streamlit.app">
+						  <a class="nav-link text-white " href="appointment.php">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-						        <i class="fas fa-dna"></i>
+						        <i class="fa fa-heartbeat"></i>
 						      </div>
 						    
-						    <span class="nav-link-text ms-1">Pre-Assessment</span>
+						    <span class="nav-link-text ms-1">Appointment</span>
 						  </a>
 						</li>
 
+            <li class="nav-item nav-link text-white ">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-dna"></i>
+                  </div>
+  
+              <button style="background-color: transparent; border-color: transparent; font-size: 14px; color: white;margin-left: -5px;" onclick="openNewWindow()">Pre-assessment</button>
+
+              <script>
+                function openNewWindow(){
+                  window.open('https://itsmeeedanhil-vetcare-main-tqkvfe.streamlit.app/', '_blank');
+                }
+              </script>
+
+            </li>
+
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="Docconsul.php">
+						  <a class="nav-link text-white " href="consultation.php">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i class="fas fa-user-md"></i>
@@ -94,9 +102,8 @@
 						  </a>
 						</li>
 
-
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="Docpetinfo.php">
+						  <a class="nav-link text-white " href="Petinfo.php">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i class="fas fa-feather"></i>
@@ -106,12 +113,11 @@
 						  </a>
 						</li>
 
-
 						<li class="nav-item">
 				              <?php                       
-				                         while($row=mysqli_fetch_assoc($result2))
+				                         while($row=mysqli_fetch_assoc($adminquery))
 				                            {
-				                                $user_id= $row['user_id'];
+				                                $user_id= $row['unique_id'];
 				                                $name = $row['name'];
 				                                $username = $row['username'];
 				                                $password = $row['password'];
@@ -119,7 +125,7 @@
 				                                $email = $row['email'];
 				                                $num = $row['num'];
 				                    ?>
-				              <a class="nav-link text-white " href="Docaccusers.php?GetID=<?php echo $user_id ?>">
+				              <a class="nav-link text-white " href="accusers.php?GetID=<?php echo $user_id ?>">
 				                <?php 
 				                         }  
 				                    ?> 
@@ -131,6 +137,7 @@
 				                <span class="nav-link-text ms-1">Account Users</span>
 				              </a>
 				            </li>
+
 
 						<li class="nav-item nav-link text-white ">
 							<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -160,6 +167,8 @@
 		</div>
 	</nav>
 </main>
+
+
 <div class="container-fluid px-2 px-md-4" style="margin-left: 300px;width: 1100px;">
 			      <div class="page-header min-height-200 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
 			        <span class="mask  bg-gradient-primary  opacity-6" ></span>
@@ -170,48 +179,53 @@
 			          </div>
 			          <div class="col-auto my-auto">
 			            <div class="h-100">
-							             
-				<div class="container rounded bg-white mt-5 mb-5">
-							    <div class="row">
-							        <div class="col-md border-right">
-							            <div class="d-flex flex-column align-items-center text-center p-1 py-3"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><?php echo $name?></span><span class="text-black-50"><?php echo $email?></span><span> </span></div>
-							        </div>
+			              
+					<div class="container rounded bg-white mt-5 mb-5">
+					    <div class="row">
+								        <div class="col-md border-right">
+								            <div class="d-flex flex-column align-items-center text-center p-1 py-3"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold"><?php echo $name?></span><span class="text-black-50"><?php echo $email?></span><span> </span></div>
+								        </div>
 
-							        <div class="col-md-5 border-right" style="margin-right: 150px;">
-							            <div class="p-3 py-5">
-							            	<form action="doctoracc.php?user_id=<?php echo $user_id ?>" method="POST">
-							                <div class="d-flex justify-content-between align-items-center mb-3">
-							                    <h4 class="text-right">Account Details</h4>
-							                </div>
-							                <div class="row mt-2">
-							                    <div class="col-md-6"><label class="labels">Name</label>
-							                    	<input type="text" class="form-control" id="accin" placeholder="" name="name" value="<?php echo $name?>">
-							                    </div>
+								        <div class="col-md-5 border-right" style="margin-right: 150px;">
+								            <div class="p-3 py-5">
+								            	<form action="adminacc.php?user_id=<?php echo $user_id ?>" method="POST">
+								                <div class="d-flex justify-content-between align-items-center mb-3">
+								                    <h4 class="text-right">Account Details</h4>
+								                </div>
+								                <div class="row mt-2">
+								                    <div class="col-md-6"><label class="labels">Name</label>
+								                    	<input type="text" class="form-control" id="accin" placeholder="" name="name" value="<?php echo $name?>">
+								                    </div>
 
-							                    <div class="col-md-6"><label class="labels">Username</label><input type="text" name="username" id="accin" class="form-control" value="<?php echo $username?>" placeholder=""></div>
-							                </div>
-							                <div class="row mt-3">
-							                	<div class="col-md-12"><label class="labels">Contact Number:</label><input type="text" name="num" id="accin" class="form-control" placeholder="" value="<?php echo $num?>"></div>
-							                	<div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" id="accin" class="form-control" placeholder="" value="<?php echo $email?>"></div>
-							                    <div class="col-md-12"><label class="labels">Password</label><input type="text" name="password" id="accin" class="form-control" placeholder="" value="<?php echo $password?>"></div>
-							                    <div class="col-md-12"><label class="labels">Type of user</label>
+								                    <div class="col-md-6"><label class="labels">Username</label><input type="text" name="username" id="accin" class="form-control" value="<?php echo $username?>" placeholder=""></div>
+								                </div>
+								                <div class="row mt-3">
+								                	<div class="col-md-12"><label class="labels">Contact Number:</label><input type="text" name="num" id="accin" class="form-control" placeholder="" value="<?php echo $num?>"></div>
+								                	<div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" id="accin" class="form-control" placeholder="" value="<?php echo $email?>"></div>
+								                    <div class="col-md-12"><label class="labels">Password</label><input type="text" name="password" id="accin" class="form-control" placeholder="" value="<?php echo $password?>"></div>
+								                    <div class="col-md-12"><label class="labels">Type of user</label>
 
-							                    <select id="accin" name="type_of_user" class="form-control" placeholder="" name="type_of_user" value="<?php echo $type_of_user?>" style = "background-color: rgb(230, 230, 230, .7);">
-				                                <option value="" disabled>Select Type of users</option>
-				                                <option value="Doctor">Doctor</option>
-				                            </select>
+								                    <select id="accin" name="type_of_user" class="form-control" placeholder="" name="type_of_user" value="<?php echo $type_of_user?>" style = "background-color: rgb(230, 230, 230, .7);">
+					                                <option value="" disabled>Select Type of users</option>
+					                                <option value="Admin">Admin</option>
+													<option value="Patient">Patient</option>
+													<option value="Doctor">Doctor</option>
+													<option value="Receptionist">Receptionist</option>
+					                            </select>
 
 
-							                   </div>
+								                   </div>
 
-							                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="save_profile" onclick="return confirm('Do you want to save your profile?')">Save Profile</button></div>
-							            </div>
-							        </form>
-							        </div>
-							    </div>
+								                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="save_profile" onclick="return confirm('Do you want to save your profile?')">Save Profile</button></div>
+								            </div>
+								        </form>
+								        </div>
+								    </div>
 
-							</div>
-							</div>
+								</div>
+					</div>
+
+
 			            </div>
 			          </div>
 			          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
@@ -226,6 +240,10 @@
 			      </div>
 			    </div>
 
+
+
+
+		  
 
 
 
@@ -260,7 +278,7 @@
 <style type="text/css">
 		body{
 		overflow: auto;
-		}
+	}
 		.form-control{
 			background-color: rgb(230, 230, 230, .7);
 			color: black;

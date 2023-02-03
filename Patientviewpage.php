@@ -9,12 +9,12 @@
   $result2 = mysqli_query($con,$query2);
 
   $app_id = $_GET['GetID'];
-  $query = " select * from appointment where app_id='".$app_id."'";
+  $query = " select * from appointment where unique_id='".$app_id."'";
   $result = mysqli_query($con,$query);
 
     while($row=mysqli_fetch_assoc($result))
         {
-            $app_id= $row['app_id'];
+            $app_id= $row['unique_id'];
             $Owner_Name = $row['owner_name'];
             $appointment_time = $row['appointment_time'];
             $appointment_date = $row['appoinment_date'];

@@ -59,7 +59,7 @@
 						</li>
 
 						<li class="nav-item">
-						  <a class="nav-link text-white " href="assessment.php">
+						  <a class="nav-link text-white " href="https://skrfffe1-vetcare-main-h328ip.streamlit.app">
 						    
 						      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						        <i class="fas fa-dna"></i>

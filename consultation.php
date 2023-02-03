@@ -112,7 +112,7 @@
 				              <?php                       
 				                         while($row=mysqli_fetch_assoc($result2))
 				                            {
-				                                $user_id= $row['user_id'];
+				                                $user_id= $row['unique_id'];
 				                                $name = $row['name'];
 				                                $username = $row['username'];
 				                                $password = $row['password'];

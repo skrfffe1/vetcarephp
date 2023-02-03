@@ -2,26 +2,19 @@
 	include('security.php');
 	require_once("connection.php");
 
-  $user = $_SESSION['type_of_user'];
-  $query2 = " select * from users where password = '$user'";
+	$user = $_SESSION['type_of_user'];
+	$query2 = " select * from users where password = '$user'";
+	$result2 = mysqli_query($con,$query2);
+
+	$user_id = $_GET['GetID'];
+	$query = "SELECT * from users where unique_id='".$user_id."'";
+	$result = mysqli_query($con,$query);
+
+	$temp_id = $_GET['GetID'];
+	$temp_id_query = "SELECT * FROM users WHERE unique_id = '".$temp_id."'";
+	$temp_id_result = mysqli_query($con, $temp_id_query);
 
 
-  $result2 = mysqli_query($con,$query2);
-
-  $user_id = $_GET['GetID'];
-  $query = "select * from users where user_id='".$user_id."'";
-  $result = mysqli_query($con,$query);
-
-    while($row=mysqli_fetch_assoc($result))
-        {
-            $user_id= $row['user_id'];
-            $name = $row['name'];
-            $username = $row['username'];
-            $password = $row['password'];
-            $type_of_user = $row['type_of_user'];
-            $email = $row['email'];
-            $num = $row['num'];
-        }
 
 ?>
 <!DOCTYPE html>
@@ -126,9 +119,9 @@
 
 						<li class="nav-item">
 				              <?php                       
-				                         while($row=mysqli_fetch_assoc($result2))
+				                         while($row=mysqli_fetch_assoc($temp_id_result))
 				                            {
-				                                $user_id= $row['user_id'];
+				                                $user_id= $row['unique_id'];
 				                                $name = $row['name'];
 				                                $username = $row['username'];
 				                                $password = $row['password'];
@@ -219,6 +212,9 @@
 								                    <select id="accin" name="type_of_user" class="form-control" placeholder="" name="type_of_user" value="<?php echo $type_of_user?>" style = "background-color: rgb(230, 230, 230, .7);">
 					                                <option value="" disabled>Select Type of users</option>
 					                                <option value="Admin">Admin</option>
+													<option value="Patient">Patient</option>
+													<option value="Doctor">Doctor</option>
+													<option value="Receptionist">Receptionist</option>
 					                            </select>
 
 

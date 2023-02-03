@@ -113,8 +113,9 @@
               <?php                       
                          while($row=mysqli_fetch_assoc($result2))
                             {
-                                $user_id= $row['user_id'];
+                                $user_id= $row['unique_id'];
                                 $name = $row['name'];
+								$email = $row['email'];
                                 $username = $row['username'];
                                 $password = $row['password'];
                                 $type_of_user = $row['type_of_user'];
@@ -182,11 +183,7 @@
 			            </div>
 			          </div>
 			          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-			            <div class="nav-wrapper position-relative end-0">
-
-
-
-			            	
+			            <div class="nav-wrapper position-relative end-0">			            	
 			            </div>
 			          </div>
 			        </div>
@@ -216,12 +213,19 @@
 	            </div>
 	            <hr class="dark horizontal my-0">
 	            <div class="card-footer p-3">
-	              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+				<div class="row">
+					<div class="col">
+						<p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+					</div>
+					<div class="col">
+						<a class="btn btn-primary">Appointments</a>
+					</div>
+				</div>
 	            </div>
 	          </div>
 	        </div>
-
-			<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="margin-left: 900px;margin-top: -155px; width: 400px;">
+			
+			<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="margin-left: 900px;margin-top: -185px; width: 400px;">
 			          <div class="card">
 			            <div class="card-header p-3 pt-2">
 			              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
@@ -244,7 +248,14 @@
 			            </div>
 			            <hr class="dark horizontal my-0">
 			            <div class="card-footer p-3">
-			              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+						 	<div class="row">
+								<div class="col">
+									<p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+								</div>
+								<div class="col">
+									<a class="btn btn-primary" href="Petinfo.php">Manage Users</a>
+								</div>
+							</div>
 			            </div>
 			          </div>
 			        </div>

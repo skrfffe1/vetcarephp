@@ -9,6 +9,15 @@
   $query = "SELECT * FROM consultation WHERE unique_id = '".$unique_id."'";
   $result = mysqli_query($con, $query);
 
+  $display = $_GET['GetID'];
+  $querydisplay = "SELECT * FROM consultation WHERE unique_id = '".$unique_id."'";
+  $displayUserInfo = mysqli_query($con, $query);
+
+  while ($row = mysqli_fetch_assoc($displayUserInfo)) {
+    $displayName = $row['owner_name'];
+    $displayUserCode = $row['unique_id'];
+  }
+
 
 
 ?>
@@ -36,7 +45,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#table1').DataTable();
+    $('#table1').DataTable({
+      paging: false,
+      searching: false
+    });
+
 });
 </script>
 
@@ -44,7 +57,9 @@
 </head>
   <body class="g-sidenav-show  bg-gray-100">
 
+  
       <main class="main-content border-radius-lg ">
+        
         <!-- Navbar -->
 
 <!-- End Navbar -->
@@ -64,13 +79,25 @@
                     
       
         <div class="row ">
+
+       
+
                 <div class="col-lg">
                   <h6 class="font-weight-bolder mb-0 text-center">Consultation Records</h6>
                   <table id="table1" class="table-dark table-sm table-bordered " style="text-align: center;">
-                      <thead>
+                  <div class="row">
+                        <div class="col">
+                            <h6> Name: <?= $displayName ?>  ID: <?= $displayUserCode ?></h6>
+                            <h6></h6> 
+                        </div>
+                        <div class="col">
+                            
+                        </div>
+                  </div>
+                
+                      <thead >
+                        
                           <tr>
-                            <th scope="col" class="A-own">Owner Name</th>
-                            <th scope="col" class="A-cont">ID Code</th>
                             <th scope="col" class="A-act">Exam. Date</th>
                             <th scope="col" class="A-act" id="A-act1">Action</th>
                           </tr>
@@ -84,8 +111,8 @@
                               $exam_date = $row['exam_date'];                     
                     ?>
                 <tr class="table table-dark table-striped table-sm table-bordered" style="color: black;">
-                    <td><?php echo $owner_name ?></td>
-                    <td><?php echo $unique_id ?></td>  
+                   
+                   
                     <td><?php echo $exam_date ?></td>
                     <td><a class="btn btn-xs btn-info" href="docviewconsult.php?GetID=<?php echo $unique_id ?>">View Data</a>
                         <a class="btn btn-xs btn-warning" href="docconsultupdate.php?GetID=<?php echo $unique_id ?>">Update</a>
@@ -134,10 +161,13 @@
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {
-      damping: '0.5'
+      damping: '0.5',
+
     }
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
+
+  
 </script>
 
 

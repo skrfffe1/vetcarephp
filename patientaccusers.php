@@ -110,6 +110,7 @@
 				                                $type_of_user = $row['type_of_user'];
 				                                $email = $row['email'];
 				                                $num = $row['num'];
+												$uuid = $row['unique_id'];
 				                    ?>
 				              <a class="nav-link text-white " href="patientaccusers.php?GetID=<?php echo $user_id ?>">
 				                <?php 
@@ -239,11 +240,14 @@
 			                    </div>
 
 			                    <div class="col-md-6"><label class="labels">Username</label><input type="text" name="username" id="accin" class="form-control" value="<?php echo $username?>" placeholder=""></div>
+						
+								<div class="col-md-12"><label class="labels" style="margin-top: 12px;">ID Code</label><input type="text" name="num" id="accin" class="form-control" placeholder="" value="<?php echo $uuid?>"></div>
 			                </div>
 			                <div class="row mt-3">
 			                	<div class="col-md-12"><label class="labels">Contact Number:</label><input type="text" name="num" id="accin" class="form-control" placeholder="" value="<?php echo $num?>"></div>
 			                	<div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" id="accin" class="form-control" placeholder="" value="<?php echo $email?>"></div>
 			                    <div class="col-md-12"><label class="labels">Password</label><input type="text" name="password" id="accin" class="form-control" placeholder="" value="<?php echo $password?>"></div>
+								
 			                    <div class="col-md-12"><label class="labels">Type of user</label>
 
 			                    <select id="accin" name="type_of_user" class="form-control" placeholder="" name="type_of_user" value="<?php echo $type_of_user?>" style = "background-color: rgb(230, 230, 230, .7);">

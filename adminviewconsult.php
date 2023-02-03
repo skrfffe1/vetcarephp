@@ -2,7 +2,7 @@
 	include('security.php');
 	require_once("connection.php");
 
-		$query = " select consult_id, p_name, l_name, examination, test, d_diagnosis, c_diagnosis, treatment from consultation";
+		$query = "SELECT * FROM consultation";
     $result = mysqli_query($con,$query);
 
   $user = $_SESSION['type_of_user'];
